@@ -1,3 +1,6 @@
+* {
+    font-size: 14px;
+}
 .st-list {
     width: 1000px;
     color: var(--st-color);
