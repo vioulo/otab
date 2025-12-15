@@ -1,16 +1,18 @@
 // show sidebar
 const clientWidth = document.body.clientWidth;
 const el_sidebar = document.getElementById('sidebar');
+const el_pin = document.querySelector('.svg-pin');
 browser.storage.sync.get('bar_pox', function (r) {
     let bar_pox = r.bar_pox || 'left';
     el_sidebar.classList.add(`show-${bar_pox}`);
+    el_pin.classList.add(`pin-${bar_pox}`)
     document.addEventListener('mousemove', (event) => {
         let tag = false;
         if (bar_pox == 'left') {
             if (event.clientX < 266 && el_sidebar.classList.contains('bar-active')) {
                 return;
             }
-            if (event.clientX < 1) {
+            if (event.clientX < 7) {
                 tag = true;
             }
         }
@@ -18,7 +20,7 @@ browser.storage.sync.get('bar_pox', function (r) {
             if (event.clientX > clientWidth - 266 && el_sidebar.classList.contains('bar-active')) {
                 return;
             }
-            if (event.clientX > clientWidth - 5) {
+            if (event.clientX > clientWidth - 7) {
                 tag = true;
             }
         }

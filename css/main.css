@@ -39,10 +39,15 @@
 }
 .svg-pin {
     position: fixed;
-    right: 0.5rem;
     top: 0.5rem;
     cursor: pointer;
     z-index: 1000;
+}
+.svg-pin.pin-left {
+    right: 0.5rem;
+}
+.svg-pin.pin-right {
+    left: 0.5rem;
 }
 .sp-t.active {
     fill: #a42721;
