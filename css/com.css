@@ -1,15 +1,15 @@
 :root {
-    --bg-color: #f7f5e0;
-    --color: #57b781;
-    --b-it-border-color: #046e1b;
+    --bg-color: #e8e8e8;
+    --color: #404955;
+    --b-it-border-color: #e1e1e1;
     --b-it-bg-color: #45c67d;
     --b-it-color: #fff;
-    --view-a-color: #303030;
+    --view-a-color: #424242;
     --view-a-bg-color: #9191911a;
     --view-a-border-color: #cccccc5e;
     /* setting */
     --st-color: #303030;
-    --st-bar-act-color: #2b50f7;
+    --st-bar-act-color: #385af2;
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -49,21 +49,15 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    color: #8bc9ff;
+    color: #7b7b7b;
     padding: 0.2rem 0.5rem;
     font-size: 12px;
     font-family: monospace;
     cursor: pointer;
 }
-.version {
-    margin-top: 10vh;
-    color: #8bc9ff;
-    font-size: 12px;
-    font-family: monospace;
-}
 .tooltip {
     position: absolute;
-    background: rgba(148, 226, 178, 0.89);
+    background: #94e2b2e3;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
