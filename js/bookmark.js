@@ -23,6 +23,7 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
     if (tmpTag) {
         folder.push(tmpFolder);
     }
+
     folder.forEach(e => {
         let el_folder = document.createElement('div');
         el_folder.className = 'b-it';
@@ -30,9 +31,14 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
         el_folder.onclick = () => {
             fillBookmark(e.id);
         }
-        title = '<div class="b-title">' + e.title + '</div>';
-        el_folder.innerHTML = title;
-        el_box.appendChild(el_folder);
+
+        browser.bookmarks.getChildren(e.id).then(children => {
+            let urlCount = children.filter(b => b.type === 'bookmark').length;
+            let el_uc = `<div class="url-count">${urlCount}</div>`;
+            title = `<div class="b-title">${e.title}</div>${el_uc}`;
+            el_folder.innerHTML = title;
+            el_box.appendChild(el_folder);
+        })
     })
 }).catch((error) => {
     console.error(error);
