@@ -7,6 +7,8 @@
     --view-a-color: #424242;
     --view-a-bg-color: #9191911a;
     --view-a-border-color: #cccccc5e;
+    --sidebar-bg: #fff;
+    --url-count-color: #e1e1e1;
     /* setting */
     --st-color: #303030;
     --st-bar-act-color: #385af2;
@@ -14,12 +16,15 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #22272e;
+        --color: #96b4db;
         --b-it-border-color: #33626a54;
         --b-it-bg-color: #45c67d;
         --b-it-color: #000;
         --view-a-color: #566e93;
         --view-a-bg-color: #7687b91a;
         --view-a-border-color: #7687b91a;
+        --sidebar-bg: #22272e;
+        --url-count-color: #2F444D;
         /* setting */
         --st-color: #fff;
         --st-bar-act-color: #8c213f;
