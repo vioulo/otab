@@ -71,9 +71,49 @@ function adjustView() {
 }
 
 // open setting
-document.querySelector('.btn-setting').onclick = () => {
+document.querySelector('.go-setting').onclick = () => {
     browser.tabs.create({ url: "setting.html" });
 }
+
+$('.col-turn').on('click', function () {
+    if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+        $('.col-item').addClass('hidden');
+    } else {
+        $(this).addClass('active');
+        $('.col-item').removeClass('hidden');
+    }
+})
+
+const default_cols = 4;
+
+$('.col-plus').on('click', function () {
+    if ($('.view').hasClass('view-grid')) {
+        let cols = $(this).data('cols') + 1;
+        $('.view').css('grid-template-columns', `repeat(${cols}, 1fr)`);
+        $(this).data('cols', cols);
+    } else {
+        $('.view').addClass('view-grid');
+        $('.view a').addClass('vg-a');
+        $(this).data('cols', default_cols);
+    }
+})
+
+$('.col-sub').on('click', function () {
+    if (!$('.view').hasClass('view-grid')) {
+        return;
+    }
+    let cols = $('.col-plus').data('cols') - 1;
+    if (cols <= default_cols) {
+        $('.view').removeClass('view-grid');
+        $('.view a').removeClass('vg-a');
+        $('.view').css('grid-template-columns', '');
+        return;
+    } else {
+        $('.view').css('grid-template-columns', `repeat(${cols}, 1fr)`);
+        $('.col-plus').data('cols', cols);
+    }
+})
 
 // 加载自定义 CSS
 browser.storage.sync.get('otab-cus-css', function (r) {

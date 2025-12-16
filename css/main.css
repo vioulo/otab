@@ -107,3 +107,33 @@ body {
     }
 }
 /* context-menu end */
+
+.view-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+.vg-a {
+    max-width: 260px;
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-setting {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    color: #7b7b7b;
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+.col-turn.active {
+    color: #00aa42;
+}

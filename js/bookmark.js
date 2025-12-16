@@ -86,10 +86,15 @@ function insertLinkElement(link) {
     a.href = link.url;
     a.innerText = link.title || link.url;
     a.setAttribute('tb_id', link.id);
+    a.title = link.title;
     a.onclick = (e) => {
         goLink(link.id);
     }
-    document.querySelector('.view').appendChild(a);
+    let el_view = document.querySelector('.view');
+    if (el_view.classList.contains('view-grid')) {
+        a.classList.add('vg-a');
+    }
+    el_view.appendChild(a);
 }
 
 // 记录链接的点击次数

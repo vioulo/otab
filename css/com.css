@@ -45,15 +45,8 @@
     overflow: hidden;
     background-color: var(--bg-color);
 }
-.btn-setting {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    color: #7b7b7b;
-    padding: 0.2rem 0.5rem;
-    font-size: 12px;
-    font-family: monospace;
-    cursor: pointer;
+.hidden {
+    display: none;
 }
 .tooltip {
     position: absolute;
