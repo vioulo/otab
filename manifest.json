@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Otab",
-    "version": "0.1.5",
+    "version": "0.2.0",
     "browser_specific_settings": {
         "gecko": {
             "id": "firefox-otab@void.gold",
