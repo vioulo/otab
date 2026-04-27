@@ -32,6 +32,14 @@ browser.storage.sync.get('bar_pox', function (r) {
     });
 });
 
+// Set page title and button titles
+document.title = browser.i18n.getMessage('pageTitleNewTab');
+document.querySelector('.col-sub').title = browser.i18n.getMessage('btnTitleDecreaseCols');
+document.querySelector('.col-plus').title = browser.i18n.getMessage('btnTitleIncreaseCols');
+document.querySelector('.col-turn').title = browser.i18n.getMessage('btnTitleSwitchToList');
+document.querySelector('.go-setting').title = browser.i18n.getMessage('btnTitleSettings');
+document.querySelector('.svg-pin').title = browser.i18n.getMessage('btnTitlePin');
+
 // 判断链接内容的宽度
 function adjustView() {
     let count = document.querySelectorAll('a').length;

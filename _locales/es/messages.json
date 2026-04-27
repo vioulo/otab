@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "Error al eliminar"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - Nueva pestaña"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - Configuración"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "Disminuir columnas"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "Aumentar columnas"
+    },
+    "btnTitleSwitchToList": {
+        "message": "Cambiar a lista"
+    },
+    "btnTitleSettings": {
+        "message": "Configuración"
+    },
+    "btnTitlePin": {
+        "message": "Fijar carpeta"
     }
 }

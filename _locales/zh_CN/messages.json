@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "删除失败"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - 新标签页"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - 设置页面"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "减少列"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "增加列"
+    },
+    "btnTitleSwitchToList": {
+        "message": "切换为列表"
+    },
+    "btnTitleSettings": {
+        "message": "设置"
+    },
+    "btnTitlePin": {
+        "message": "固定文件夹"
     }
 }

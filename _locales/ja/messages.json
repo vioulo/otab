@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "削除に失敗しました"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - 新しいタブ"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - 設定"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "列を減らす"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "列を増やす"
+    },
+    "btnTitleSwitchToList": {
+        "message": "リストに切り替え"
+    },
+    "btnTitleSettings": {
+        "message": "設定"
+    },
+    "btnTitlePin": {
+        "message": "フォルダをピン留め"
     }
 }

@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "Delete failed"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - New Tab"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - Settings"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "Decrease columns"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "Increase columns"
+    },
+    "btnTitleSwitchToList": {
+        "message": "Switch to list"
+    },
+    "btnTitleSettings": {
+        "message": "Settings"
+    },
+    "btnTitlePin": {
+        "message": "Pin folder"
     }
 }

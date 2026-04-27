@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "Löschen fehlgeschlagen"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - Neuer Tab"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - Einstellungen"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "Spalten verringern"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "Spalten erhöhen"
+    },
+    "btnTitleSwitchToList": {
+        "message": "Zur Liste wechseln"
+    },
+    "btnTitleSettings": {
+        "message": "Einstellungen"
+    },
+    "btnTitlePin": {
+        "message": "Ordner anheften"
     }
 }

@@ -1,4 +1,5 @@
 // 侧边栏位置
+document.title = browser.i18n.getMessage('pageTitleSetting');
 document.querySelector('.st-label').innerText = browser.i18n.getMessage('sidebarPosition');
 document.querySelector('.bar-left').innerText = browser.i18n.getMessage('left');
 document.querySelector('.bar-right').innerText = browser.i18n.getMessage('right');

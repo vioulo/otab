@@ -43,5 +43,26 @@
     },
     "deleteFailed": {
         "message": "Échec de la suppression"
+    },
+    "pageTitleNewTab": {
+        "message": "Otab - Nouvel onglet"
+    },
+    "pageTitleSetting": {
+        "message": "Otab - Paramètres"
+    },
+    "btnTitleDecreaseCols": {
+        "message": "Diminuer les colonnes"
+    },
+    "btnTitleIncreaseCols": {
+        "message": "Augmenter les colonnes"
+    },
+    "btnTitleSwitchToList": {
+        "message": "Basculer vers la liste"
+    },
+    "btnTitleSettings": {
+        "message": "Paramètres"
+    },
+    "btnTitlePin": {
+        "message": "Épingler le dossier"
     }
 }
