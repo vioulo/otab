@@ -1,0 +1,47 @@
+{
+    "noBookmarks": {
+        "message": "ツールバーにブックマークがありません"
+    },
+    "noPinnedFolder": {
+        "message": "⭕️ まだフォルダがピン留めされていません"
+    },
+    "sidebarPosition": {
+        "message": "サイドバーの位置："
+    },
+    "left": {
+        "message": "左"
+    },
+    "right": {
+        "message": "右"
+    },
+    "customCSS": {
+        "message": "カスタムCSS："
+    },
+    "confirm": {
+        "message": "確認"
+    },
+    "version": {
+        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+    },
+    "ok": {
+        "message": "ok"
+    },
+    "openInNewTab": {
+        "message": "新しいタブで開く"
+    },
+    "openInNewWindow": {
+        "message": "新しいウィンドウで開く"
+    },
+    "copyLink": {
+        "message": "リンクをコピー"
+    },
+    "delete": {
+        "message": "削除"
+    },
+    "confirmDelete": {
+        "message": "削除してもよろしいですか？"
+    },
+    "deleteFailed": {
+        "message": "削除に失敗しました"
+    }
+}

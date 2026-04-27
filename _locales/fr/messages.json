@@ -1,0 +1,47 @@
+{
+    "noBookmarks": {
+        "message": "Aucun signet dans la barre d'outils"
+    },
+    "noPinnedFolder": {
+        "message": "⭕️ Aucun dossier épinglé encore"
+    },
+    "sidebarPosition": {
+        "message": "Position de la barre latérale :"
+    },
+    "left": {
+        "message": "Gauche"
+    },
+    "right": {
+        "message": "Droite"
+    },
+    "customCSS": {
+        "message": "CSS personnalisé :"
+    },
+    "confirm": {
+        "message": "Confirmer"
+    },
+    "version": {
+        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+    },
+    "ok": {
+        "message": "ok"
+    },
+    "openInNewTab": {
+        "message": "Ouvrir dans un nouvel onglet"
+    },
+    "openInNewWindow": {
+        "message": "Ouvrir dans une nouvelle fenêtre"
+    },
+    "copyLink": {
+        "message": "Copier le lien"
+    },
+    "delete": {
+        "message": "Supprimer"
+    },
+    "confirmDelete": {
+        "message": "Êtes-vous sûr de supprimer ?"
+    },
+    "deleteFailed": {
+        "message": "Échec de la suppression"
+    }
+}

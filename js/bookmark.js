@@ -8,7 +8,7 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
     let toolbar = tree[0].children;
     const el_box = document.querySelector('.box');
     if (!toolbar) {
-        el_box.innerText = '书签工具栏没有内容';
+        el_box.innerText = browser.i18n.getMessage('noBookmarks');
         return;
     }
     let folder = [];
@@ -172,38 +172,38 @@ const ContextMenu = function (options) {
 const contextMenu = ContextMenu({
     menus: [
         {
-            name: "新标签打开",
+            name: browser.i18n.getMessage('openInNewTab'),
             onClick: function (e) {
                 window.open(window.cur_link.url, '_blank');
             },
         },
         {
-            name: "新窗口打开",
+            name: browser.i18n.getMessage('openInNewWindow'),
             onClick: function (e) {
                 browser.windows.create({ url: window.cur_link.url });
             },
         },
         {
-            name: "复制链接",
+            name: browser.i18n.getMessage('copyLink'),
             onClick: function (e) {
                  // 使用剪贴板 API 复制内容
                 navigator.clipboard.writeText(window.cur_link.url).then(() => {
-                    showTooltip(e.clientX, e.clientY, '已复制');
+                    showTooltip(e.clientX, e.clientY, browser.i18n.getMessage('ok'));
                 }).catch(err => {
                     console.error('复制失败: ', err);
                 });
             }
         },
         {
-            name: "删除",
+            name: browser.i18n.getMessage('delete'),
             onClick: function (e) {
                 let id = window.cur_link.id;
-                if (confirm("确定要删除吗?")) {
+                if (confirm(browser.i18n.getMessage('confirmDelete'))) {
                     try {
                         document.querySelector(`a[tb_id="${id}"]`).remove();
                         browser.bookmarks.remove(id);
                     } catch (error) {
-                        alert('删除失败');
+                        alert(browser.i18n.getMessage('deleteFailed'));
                         console.error(error);
                     }
                 }

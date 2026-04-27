@@ -1,0 +1,47 @@
+{
+    "noBookmarks": {
+        "message": "书签工具栏没有内容"
+    },
+    "noPinnedFolder": {
+        "message": "⭕️ 您还未固定文件夹"
+    },
+    "sidebarPosition": {
+        "message": "侧边栏位置："
+    },
+    "left": {
+        "message": "左侧"
+    },
+    "right": {
+        "message": "右侧"
+    },
+    "customCSS": {
+        "message": "自定义 CSS ："
+    },
+    "confirm": {
+        "message": "确认"
+    },
+    "version": {
+        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+    },
+    "ok": {
+        "message": "ok"
+    },
+    "openInNewTab": {
+        "message": "新标签打开"
+    },
+    "openInNewWindow": {
+        "message": "新窗口打开"
+    },
+    "copyLink": {
+        "message": "复制链接"
+    },
+    "delete": {
+        "message": "删除"
+    },
+    "confirmDelete": {
+        "message": "确定要删除吗?"
+    },
+    "deleteFailed": {
+        "message": "删除失败"
+    }
+}

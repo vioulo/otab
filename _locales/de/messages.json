@@ -1,0 +1,47 @@
+{
+    "noBookmarks": {
+        "message": "Keine Lesezeichen in der Symbolleiste"
+    },
+    "noPinnedFolder": {
+        "message": "⭕️ Noch kein Ordner angeheftet"
+    },
+    "sidebarPosition": {
+        "message": "Seitenleiste Position:"
+    },
+    "left": {
+        "message": "Links"
+    },
+    "right": {
+        "message": "Rechts"
+    },
+    "customCSS": {
+        "message": "Benutzerdefiniertes CSS:"
+    },
+    "confirm": {
+        "message": "Bestätigen"
+    },
+    "version": {
+        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+    },
+    "ok": {
+        "message": "ok"
+    },
+    "openInNewTab": {
+        "message": "In neuem Tab öffnen"
+    },
+    "openInNewWindow": {
+        "message": "In neuem Fenster öffnen"
+    },
+    "copyLink": {
+        "message": "Link kopieren"
+    },
+    "delete": {
+        "message": "Löschen"
+    },
+    "confirmDelete": {
+        "message": "Sind Sie sicher zu löschen?"
+    },
+    "deleteFailed": {
+        "message": "Löschen fehlgeschlagen"
+    }
+}

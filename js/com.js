@@ -153,7 +153,7 @@ browser.storage.sync.get('otab_pin', function (r) {
     const el_link = document.querySelector('.view');
     const folderId = r['otab_pin'] || 0;
     if (!folderId) {
-        el_link.innerHTML = '<div class="empty-link">⭕️ 您还未固定文件夹</div>';
+        el_link.innerHTML = '<div class="empty-link">' + browser.i18n.getMessage('noPinnedFolder') + '</div>';
     } else {
         document.querySelector('.sp-t').classList.add('active');
         el_link.setAttribute('tb_id', r['otab_pin']);
