@@ -75,43 +75,46 @@ document.querySelector('.go-setting').onclick = () => {
     browser.tabs.create({ url: "setting.html" });
 }
 
-$('.col-turn').on('click', function () {
-    if ($(this).hasClass('active')) {
-        $(this).removeClass('active');
-        $('.col-item').addClass('hidden');
+document.querySelector('.col-turn').addEventListener('click', function () {
+    if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        document.querySelectorAll('.col-item').forEach(item => item.classList.add('hidden'));
     } else {
-        $(this).addClass('active');
-        $('.col-item').removeClass('hidden');
+        this.classList.add('active');
+        document.querySelectorAll('.col-item').forEach(item => item.classList.remove('hidden'));
     }
 })
 
 const default_cols = 4;
 
-$('.col-plus').on('click', function () {
-    if ($('.view').hasClass('view-grid')) {
-        let cols = $(this).data('cols') + 1;
-        $('.view').css('grid-template-columns', `repeat(${cols}, 1fr)`);
-        $(this).data('cols', cols);
+document.querySelector('.col-plus').addEventListener('click', function () {
+    const view = document.querySelector('.view');
+    if (view.classList.contains('view-grid')) {
+        let cols = parseInt(this.dataset.cols || default_cols) + 1;
+        view.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        this.dataset.cols = cols;
     } else {
-        $('.view').addClass('view-grid');
-        $('.view a').addClass('vg-a');
-        $(this).data('cols', default_cols);
+        view.classList.add('view-grid');
+        document.querySelectorAll('.view a').forEach(a => a.classList.add('vg-a'));
+        this.dataset.cols = default_cols;
     }
 })
 
-$('.col-sub').on('click', function () {
-    if (!$('.view').hasClass('view-grid')) {
+document.querySelector('.col-sub').addEventListener('click', function () {
+    const view = document.querySelector('.view');
+    if (!view.classList.contains('view-grid')) {
         return;
     }
-    let cols = $('.col-plus').data('cols') - 1;
+    const colPlus = document.querySelector('.col-plus');
+    let cols = parseInt(colPlus.dataset.cols || default_cols) - 1;
     if (cols <= default_cols) {
-        $('.view').removeClass('view-grid');
-        $('.view a').removeClass('vg-a');
-        $('.view').css('grid-template-columns', '');
+        view.classList.remove('view-grid');
+        document.querySelectorAll('.view a').forEach(a => a.classList.remove('vg-a'));
+        view.style.gridTemplateColumns = '';
         return;
     } else {
-        $('.view').css('grid-template-columns', `repeat(${cols}, 1fr)`);
-        $('.col-plus').data('cols', cols);
+        view.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        colPlus.dataset.cols = cols;
     }
 })
 
@@ -127,8 +130,9 @@ browser.storage.sync.get('otab-cus-css', function (r) {
 });
 
 // pins
-$('.svg-pin').on('click', function () {
-    const id = $('.view').attr('tb_id');
+document.querySelector('.svg-pin').addEventListener('click', function () {
+    const view = document.querySelector('.view');
+    const id = view.getAttribute('tb_id');
     if (!id) {
         return;
     }
@@ -136,10 +140,10 @@ $('.svg-pin').on('click', function () {
     browser.storage.sync.get(tag, function (r) {
         if (r[tag] != id) {
             browser.storage.sync.set({ [tag]: id });
-            $('.sp-t').addClass('active');
+            document.querySelector('.sp-t').classList.add('active');
         } else {
             browser.storage.sync.set({ [tag]: 0 });
-            $('.sp-t').removeClass('active');
+            document.querySelector('.sp-t').classList.remove('active');
         }
     });
 });
@@ -151,8 +155,8 @@ browser.storage.sync.get('otab_pin', function (r) {
     if (!folderId) {
         el_link.innerHTML = '<div class="empty-link">⭕️ 您还未固定文件夹</div>';
     } else {
-        $('.sp-t').addClass('active');
-        $('.view').attr('tb_id', r['otab_pin']);
+        document.querySelector('.sp-t').classList.add('active');
+        el_link.setAttribute('tb_id', r['otab_pin']);
         adjustFolderAndInsert(folderId);
     }
 });

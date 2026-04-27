@@ -88,14 +88,15 @@ function fillBookmark(folderId) {
     el_divs.forEach((div) => {
         div.classList.remove('b-active');
     });
-    $('.view').empty();
-    $('.view').attr('tb_id', folderId);
+    const view = document.querySelector('.view');
+    view.innerHTML = '';
+    view.setAttribute('tb_id', folderId);
     adjustFolderAndInsert(folderId);
     browser.storage.sync.get('otab_pin', function (r) {
         if (r['otab_pin'] == folderId) {
-            $('.sp-t').addClass('active');
+            document.querySelector('.sp-t').classList.add('active');
         } else {
-            $('.sp-t').removeClass('active');
+            document.querySelector('.sp-t').classList.remove('active');
         }
     });
 }
@@ -115,17 +116,18 @@ function insertLinkElement(link) {
     // }
     // el_view.appendChild(a);
 
-    let el_view = $('.view');
+    let el_view = document.querySelector('.view');
     let a_class = '';
-    if (el_view.hasClass('view-grid')) {
+    if (el_view.classList.contains('view-grid')) {
         a_class = 'vg-a';
     }
 
     const urlObj = new URL(link.url);
+    const hostname = urlObj.hostname;
 
     let el_a = `<a class="${a_class}" href="${link.url}" tb_id="${link.id}" title="${link.title}">
-        <img src="https://favicon.im/${urlObj.hostname}" width="16" />${link.title}</a>`;
-    el_view.append(el_a);
+        <img src="https://favicon.im/${hostname}" width="16" />${link.title}</a>`;
+    el_view.insertAdjacentHTML('beforeend', el_a);
 }
 
 // 记录链接的点击次数

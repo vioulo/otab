@@ -1,21 +1,23 @@
 // 侧边栏位置
 browser.storage.sync.get('bar_pox', function (r) {
     let bar_pox = r.bar_pox || 'left';
-    $(`.bar-${bar_pox}`).addClass('st-bar-act');
+    document.querySelector(`.bar-${bar_pox}`).classList.add('st-bar-act');
 });
 
-$('.bar-it').on('click', function () {
-    $('.bar-it').removeClass('st-bar-act');
-    $(this).addClass('st-bar-act');
-    browser.storage.sync.set({ 'bar_pox': $(this).attr('pox') });
+document.querySelectorAll('.bar-it').forEach(item => {
+    item.addEventListener('click', function () {
+        document.querySelectorAll('.bar-it').forEach(i => i.classList.remove('st-bar-act'));
+        this.classList.add('st-bar-act');
+        browser.storage.sync.set({ 'bar_pox': this.getAttribute('pox') });
+    });
 });
 
 // 自定义 CSS
 browser.storage.sync.get('otab-cus-css', function (r) {
-    $('#cus-css').val(r['otab-cus-css'] || '');
+    document.getElementById('cus-css').value = r['otab-cus-css'] || '';
 });
 
-$('.cc-cfm').on('click', function (e) {
-    browser.storage.sync.set({ 'otab-cus-css': $('#cus-css').val() });
+document.querySelector('.cc-cfm').addEventListener('click', function (e) {
+    browser.storage.sync.set({ 'otab-cus-css': document.getElementById('cus-css').value });
     showTooltip(e.clientX, e.clientY, 'ok');
 });
