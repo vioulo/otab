@@ -3,6 +3,11 @@
 
 ### Icon from：<a href="https://www.svgrepo.com/collection/summer-holidays-glyphs/">svgrepo</a>
 
+#### 0.2.1 26-04-27 14
+1. 修复侧边栏文件夹排序异常问题
+2. 移除 jQ, 使用原生 js
+3. 添加多语言
+
 #### 0.2.0 25-12-16 20
 1. 更新设置页面配色、样式
 2. Pin 的位置随侧边栏位置调换
