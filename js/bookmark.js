@@ -24,22 +24,35 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
         folder.push(tmpFolder);
     }
 
-    folder.forEach(e => {
-        let el_folder = document.createElement('div');
-        el_folder.className = 'b-it';
-        el_folder.setAttribute('tb_id', e.id);
-        el_folder.onclick = () => {
-            fillBookmark(e.id);
-        }
-
-        browser.bookmarks.getChildren(e.id).then(children => {
+    let promises = folder.map(e => {
+        return browser.bookmarks.getChildren(e.id).then(children => {
             let urlCount = children.filter(b => b.type === 'bookmark').length;
+            return { e, urlCount };
+        }).catch(() => {
+            // For tmpFolder or errors, assume 0 or calculate manually
+            let urlCount = 0;
+            if (e.id === 'no-fo') {
+                urlCount = toolbar.filter(b => b.type === 'bookmark').length;
+            }
+            return { e, urlCount };
+        });
+    });
+
+    Promise.all(promises).then(results => {
+        results.forEach(({ e, urlCount }) => {
+            let el_folder = document.createElement('div');
+            el_folder.className = 'b-it';
+            el_folder.setAttribute('tb_id', e.id);
+            el_folder.onclick = () => {
+                fillBookmark(e.id);
+            }
+
             let el_uc = `<div class="url-count">${urlCount}</div>`;
-            title = `<div class="b-title">${e.title}</div>${el_uc}`;
+            let title = `<div class="b-title">${e.title}</div>${el_uc}`;
             el_folder.innerHTML = title;
             el_box.appendChild(el_folder);
-        })
-    })
+        });
+    });
 }).catch((error) => {
     console.error(error);
 })
