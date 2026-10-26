@@ -99,6 +99,27 @@ body {
     background-color: #334cd0; /*#1c3ef7;*/
     color: #fff;
 }
+.view a img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+.view a .fallback-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 2px;
+    background: rgba(128, 128, 128, 0.2);
+    color: inherit;
+    flex-shrink: 0;
+    user-select: none;
+}
 
 /* context-menu start */
 .custom-context-menu {

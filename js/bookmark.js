@@ -101,32 +101,50 @@ function fillBookmark(folderId) {
     });
 }
 
-function insertLinkElement(link) {
-    // let a = document.createElement('a');
-    // a.href = link.url;
-    // a.innerText = link.title || link.url;
-    // a.setAttribute('tb_id', link.id);
-    // a.title = link.title;
-    // a.onclick = (e) => {
-    //     goLink(link.id);
-    // }
-    // let el_view = document.querySelector('.view');
-    // if (el_view.classList.contains('view-grid')) {
-    //     a.classList.add('vg-a');
-    // }
-    // el_view.appendChild(a);
+function escapeHtml(str) {
+    if (!str) return '';
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
+function insertLinkElement(link) {
     let el_view = document.querySelector('.view');
     let a_class = '';
     if (el_view.classList.contains('view-grid')) {
         a_class = 'vg-a';
     }
 
-    const urlObj = new URL(link.url);
-    const hostname = urlObj.hostname;
+    let faviconUrl = '';
+    let firstChar = '#';
 
-    let el_a = `<a class="${a_class}" href="${link.url}" tb_id="${link.id}" title="${link.title}">
-        <img src="https://favicon.im/${hostname}" width="16" />${link.title}</a>`;
+    try {
+        const urlObj = new URL(link.url);
+        if (urlObj.protocol === 'http:' || urlObj.protocol === 'https:') {
+            faviconUrl = `${urlObj.origin}/favicon.ico`;
+            const cleanHost = urlObj.hostname.replace(/^www\./, '');
+            firstChar = (cleanHost.charAt(0) || link.title?.charAt(0) || '#').toUpperCase();
+        } else {
+            firstChar = (link.title?.charAt(0) || '#').toUpperCase();
+        }
+    } catch (e) {
+        firstChar = (link.title?.charAt(0) || '#').toUpperCase();
+    }
+
+    const titleText = escapeHtml(link.title || link.url || '');
+    const escapedUrl = escapeHtml(link.url || '#');
+
+    let iconHtml = '';
+    if (faviconUrl) {
+        iconHtml = `<img src="${faviconUrl}" width="16" height="16" alt="" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='inline-flex';" /><span class="fallback-icon">${firstChar}</span>`;
+    } else {
+        iconHtml = `<span class="fallback-icon" style="display:inline-flex;">${firstChar}</span>`;
+    }
+
+    let el_a = `<a class="${a_class}" href="${escapedUrl}" tb_id="${link.id}" title="${titleText}">${iconHtml}${titleText}</a>`;
     el_view.insertAdjacentHTML('beforeend', el_a);
 }
 
@@ -212,11 +230,13 @@ const contextMenu = ContextMenu({
     ],
 });
 
-function showMenu(e) {
+function showMenu(e, targetA) {
     e.preventDefault();
+    const linkEl = targetA || e.target.closest("a[tb_id]");
+    if (!linkEl) return;
     window.cur_link = {
-        id: e.target.getAttribute("tb_id"),
-        url: e.target.href
+        id: linkEl.getAttribute("tb_id"),
+        url: linkEl.href
     };
     let h_top = e.clientY;
     let h_left = e.clientX;
@@ -240,8 +260,9 @@ function hideMenu(event) {
 
 document.addEventListener("click", hideMenu);
 document.addEventListener("contextmenu", function (e) {
-    if (e.target.tagName == "A") {
-        showMenu(e);
+    const linkEl = e.target.closest("a[tb_id]");
+    if (linkEl) {
+        showMenu(e, linkEl);
     } else {
         hideMenu();
     }

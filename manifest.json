@@ -9,12 +9,6 @@
             "strict_min_version": "100.0"
         }
     },
-    "background": {
-        "scripts": [
-            "js/background.js"
-        ],
-        "persistent": false
-    },
     "icons": {
         "32": "imgs/icons/icon32.png",
         "48": "imgs/icons/icon48.png",

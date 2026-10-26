@@ -1,13 +1,13 @@
 // show sidebar
-const clientWidth = document.body.clientWidth;
 const el_sidebar = document.getElementById('sidebar');
 const el_pin = document.querySelector('.svg-pin');
 browser.storage.sync.get('bar_pox', function (r) {
     let bar_pox = r.bar_pox || 'left';
     el_sidebar.classList.add(`show-${bar_pox}`);
-    el_pin.classList.add(`pin-${bar_pox}`)
+    el_pin.classList.add(`pin-${bar_pox}`);
     document.addEventListener('mousemove', (event) => {
         let tag = false;
+        const currentWidth = window.innerWidth;
         if (bar_pox == 'left') {
             if (event.clientX < 266 && el_sidebar.classList.contains('bar-active')) {
                 return;
@@ -17,10 +17,10 @@ browser.storage.sync.get('bar_pox', function (r) {
             }
         }
         if (bar_pox == 'right') {
-            if (event.clientX > clientWidth - 266 && el_sidebar.classList.contains('bar-active')) {
+            if (event.clientX > currentWidth - 266 && el_sidebar.classList.contains('bar-active')) {
                 return;
             }
-            if (event.clientX > clientWidth - 7) {
+            if (event.clientX > currentWidth - 7) {
                 tag = true;
             }
         }
@@ -44,6 +44,8 @@ document.querySelector('.svg-pin').title = browser.i18n.getMessage('btnTitlePin'
 function adjustView() {
     let count = document.querySelectorAll('a').length;
     let el_view = document.querySelector('.view');
+    if (!el_view) return;
+    const currentWidth = window.innerWidth;
     let view_width = 600;
     if (count >= 20) {
         view_width = 800;
@@ -64,10 +66,10 @@ function adjustView() {
         view_width = 1400;
     }
     if (count >= 80) {
-        view_width = clientWidth;
+        view_width = currentWidth;
     }
-    if (view_width > clientWidth) {
-        view_width = clientWidth;
+    if (view_width > currentWidth) {
+        view_width = currentWidth;
     }
 
     el_view.style.width = view_width + 'px';
@@ -77,6 +79,8 @@ function adjustView() {
         el_view.style.overflowY = "scroll";
     }
 }
+
+window.addEventListener('resize', adjustView);
 
 // open setting
 document.querySelector('.go-setting').onclick = () => {
