@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "Minimalist new tab with bookmark manager and page pinboard"
+    },
     "noBookmarks": {
         "message": "No bookmarks in toolbar"
     },
@@ -21,10 +27,10 @@
         "message": "Confirm"
     },
     "version": {
-        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+        "message": "Otab 0.3.0 - 2026.04 :)"
     },
     "ok": {
-        "message": "ok"
+        "message": "OK"
     },
     "openInNewTab": {
         "message": "Open in new tab"
@@ -64,5 +70,101 @@
     },
     "btnTitlePin": {
         "message": "Pin folder"
+    },
+    "pinnedBoard": {
+        "message": "📌 Pinned Board"
+    },
+    "pinnedBoardDesc": {
+        "message": "Pinned pages"
+    },
+    "pinButton": {
+        "message": "Pin Current Page"
+    },
+    "pinButtonTooltip": {
+        "message": "Pin current page (max 60)"
+    },
+    "emptyState": {
+        "message": "No pinned pages yet"
+    },
+    "emptyStateHint": {
+        "message": "Right-click on a page or click above to pin it"
+    },
+    "deleteButtonTooltip": {
+        "message": "Delete"
+    },
+    "contextMenuPin": {
+        "message": "Pin page to Otab"
+    },
+    "contextMenuUnpin": {
+        "message": "Unpin from Otab"
+    },
+    "cannotPinSpecialPage": {
+        "message": "Cannot pin special browser pages"
+    },
+    "alreadyPinned": {
+        "message": "This page is already pinned"
+    },
+    "pinnedSuccess": {
+        "message": "Page pinned successfully"
+    },
+    "unpinnedSuccess": {
+        "message": "Page unpinned successfully"
+    },
+    "addNewGroup": {
+        "message": "New Group"
+    },
+    "addNewGroupTooltip": {
+        "message": "New group (max 6 groups)"
+    },
+    "editGroup": {
+        "message": "Edit Group"
+    },
+    "deleteGroup": {
+        "message": "Delete Group"
+    },
+    "groupName": {
+        "message": "Group Name"
+    },
+    "newGroup": {
+        "message": "New Group"
+    },
+    "defaultGroup": {
+        "message": "Default"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "Cannot delete default group"
+    },
+    "confirmDeleteGroup": {
+        "message": "Are you sure you want to delete this group? All pages in this group will be moved to Default group."
+    },
+    "notice": {
+        "message": "Notice"
+    },
+    "input": {
+        "message": "Input"
+    },
+    "warning": {
+        "message": "Warning"
+    },
+    "success": {
+        "message": "Success"
+    },
+    "cancel": {
+        "message": "Cancel"
+    },
+    "noPagesInGroup": {
+        "message": "No pages in this group"
+    },
+    "openAllLinks": {
+        "message": "Open all links in background tabs"
+    },
+    "maxPagesReached": {
+        "message": "Pinned links limit reached (maximum 60)"
+    },
+    "maxGroupsReached": {
+        "message": "Group limit reached (maximum 6 groups)"
+    },
+    "limitCountHint": {
+        "message": "Max 60 links, max 6 groups"
     }
 }

@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "极简新标签页与常用网页图钉"
+    },
     "noBookmarks": {
         "message": "书签工具栏没有内容"
     },
@@ -21,10 +27,10 @@
         "message": "确认"
     },
     "version": {
-        "message": "Otab 0.2.1 - 2026.04.27 14 :)"
+        "message": "Otab 0.3.0 - 2026.04 :)"
     },
     "ok": {
-        "message": "ok"
+        "message": "确定"
     },
     "openInNewTab": {
         "message": "新标签打开"
@@ -64,5 +70,101 @@
     },
     "btnTitlePin": {
         "message": "固定文件夹"
+    },
+    "pinnedBoard": {
+        "message": "📌 图钉板"
+    },
+    "pinnedBoardDesc": {
+        "message": "常用网页图钉"
+    },
+    "pinButton": {
+        "message": "钉住当前页面"
+    },
+    "pinButtonTooltip": {
+        "message": "钉住当前页面 (最多60条)"
+    },
+    "emptyState": {
+        "message": "还没有钉住的页面"
+    },
+    "emptyStateHint": {
+        "message": "右键点击页面或点击上方按钮来钉住它"
+    },
+    "deleteButtonTooltip": {
+        "message": "删除"
+    },
+    "contextMenuPin": {
+        "message": "钉住此页面到 Otab"
+    },
+    "contextMenuUnpin": {
+        "message": "从 Otab 取消钉住"
+    },
+    "cannotPinSpecialPage": {
+        "message": "无法钉住浏览器特殊页面"
+    },
+    "alreadyPinned": {
+        "message": "此页面已经被钉住了"
+    },
+    "pinnedSuccess": {
+        "message": "页面钉住成功"
+    },
+    "unpinnedSuccess": {
+        "message": "页面取消钉住成功"
+    },
+    "addNewGroup": {
+        "message": "新分组"
+    },
+    "addNewGroupTooltip": {
+        "message": "新建分组 (最多6组)"
+    },
+    "editGroup": {
+        "message": "编辑分组"
+    },
+    "deleteGroup": {
+        "message": "删除分组"
+    },
+    "groupName": {
+        "message": "分组名称"
+    },
+    "newGroup": {
+        "message": "新建分组"
+    },
+    "defaultGroup": {
+        "message": "默认分组"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "无法删除默认分组"
+    },
+    "confirmDeleteGroup": {
+        "message": "确定要删除此分组吗？该分组中的所有页面将移动到默认分组。"
+    },
+    "notice": {
+        "message": "提示"
+    },
+    "input": {
+        "message": "输入"
+    },
+    "warning": {
+        "message": "警告"
+    },
+    "success": {
+        "message": "成功"
+    },
+    "cancel": {
+        "message": "取消"
+    },
+    "noPagesInGroup": {
+        "message": "该分组中没有页面"
+    },
+    "openAllLinks": {
+        "message": "在后台打开所有链接"
+    },
+    "maxPagesReached": {
+        "message": "图钉链接已达上限（最多 60 条）"
+    },
+    "maxGroupsReached": {
+        "message": "分组数量已达上限（最多 6 组）"
+    },
+    "limitCountHint": {
+        "message": "链接上限 60 条，分组上限 6 组"
     }
 }
