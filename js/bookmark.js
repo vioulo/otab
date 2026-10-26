@@ -1,14 +1,41 @@
+const PINNED_BOARD_ID = 'otab-pinned';
 const tmpFolder = {
     id: 'no-fo',
     title: '缓存区',
 };
+
+// 渲染侧边栏置顶的图钉板
+function renderPinnedBoardSidebar(el_box) {
+    (browser.storage || chrome.storage).sync.get(['tmpinData', 'otab_pin'], function(r) {
+        const data = r.tmpinData;
+        const total = (data && Array.isArray(data.groups))
+            ? data.groups.reduce((acc, g) => acc + (Array.isArray(g.pages) ? g.pages.length : 0), 0)
+            : 0;
+
+        let el_pinned = document.createElement('div');
+        el_pinned.className = 'b-it b-it-pinned';
+        el_pinned.setAttribute('tb_id', PINNED_BOARD_ID);
+        el_pinned.onclick = () => {
+            fillBookmark(PINNED_BOARD_ID);
+        };
+
+        if (r['otab_pin'] === PINNED_BOARD_ID) {
+            el_pinned.classList.add('b-active');
+        }
+
+        let el_uc = `<div class="url-count">${total}</div>`;
+        let title = `<div class="b-title">${(browser.i18n || chrome.i18n).getMessage('pinnedBoard') || '📌 图钉板'}</div>${el_uc}`;
+        el_pinned.innerHTML = title;
+        el_box.prepend(el_pinned);
+    });
+}
 
 // 读取书签内容
 browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
     let toolbar = tree[0].children;
     const el_box = document.querySelector('.box');
     if (!toolbar) {
-        el_box.innerText = browser.i18n.getMessage('noBookmarks');
+        el_box.innerText = (browser.i18n || chrome.i18n).getMessage('noBookmarks');
         return;
     }
     let folder = [];
@@ -29,7 +56,6 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
             let urlCount = children.filter(b => b.type === 'bookmark').length;
             return { e, urlCount };
         }).catch(() => {
-            // For tmpFolder or errors, assume 0 or calculate manually
             let urlCount = 0;
             if (e.id === 'no-fo') {
                 urlCount = toolbar.filter(b => b.type === 'bookmark').length;
@@ -45,21 +71,71 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
             el_folder.setAttribute('tb_id', e.id);
             el_folder.onclick = () => {
                 fillBookmark(e.id);
-            }
+            };
 
             let el_uc = `<div class="url-count">${urlCount}</div>`;
             let title = `<div class="b-title">${e.title}</div>${el_uc}`;
             el_folder.innerHTML = title;
             el_box.appendChild(el_folder);
         });
+
+        // 在侧边栏顶部加入图钉板
+        renderPinnedBoardSidebar(el_box);
     });
 }).catch((error) => {
     console.error(error);
-})
+});
+
+// 监听图钉数据变化，实时联动侧边栏与主视图
+(browser.storage || chrome.storage).onChanged.addListener(function(changes, namespace) {
+    if (namespace === 'sync' && changes['tmpinData']) {
+        const pinCountEl = document.querySelector(`div[tb_id="${PINNED_BOARD_ID}"] .url-count`);
+        const data = changes['tmpinData'].newValue;
+        const total = (data && Array.isArray(data.groups))
+            ? data.groups.reduce((acc, g) => acc + (Array.isArray(g.pages) ? g.pages.length : 0), 0)
+            : 0;
+        if (pinCountEl) pinCountEl.textContent = total;
+
+        const currentView = document.querySelector('.view');
+        if (currentView && currentView.getAttribute('tb_id') === PINNED_BOARD_ID) {
+            adjustFolderAndInsert(PINNED_BOARD_ID);
+        }
+    }
+});
 
 // 判断文件夹 id 并填充数据
 function adjustFolderAndInsert(folderId) {
-    if (folderId == tmpFolder.id) {
+    if (folderId === PINNED_BOARD_ID) {
+        (browser.storage || chrome.storage).sync.get('tmpinData', function (r) {
+            let data = r.tmpinData;
+            let el_view = document.querySelector('.view');
+            el_view.innerHTML = '';
+            if (!data || !Array.isArray(data.groups) || data.groups.length === 0) {
+                el_view.innerHTML = `<div class="empty-link">${(browser.i18n || chrome.i18n).getMessage('emptyState') || '还没有钉住的页面'}</div>`;
+                adjustView();
+                return;
+            }
+
+            let hasAny = false;
+            data.groups.forEach(group => {
+                if (Array.isArray(group.pages) && group.pages.length > 0) {
+                    hasAny = true;
+                    group.pages.forEach(p => {
+                        insertLinkElement({
+                            id: 'pin_' + p.url,
+                            url: p.url,
+                            title: p.title || p.url
+                        });
+                    });
+                }
+            });
+
+            if (!hasAny) {
+                el_view.innerHTML = `<div class="empty-link">${(browser.i18n || chrome.i18n).getMessage('emptyState') || '还没有钉住的页面'}</div>`;
+            }
+            adjustView();
+        });
+    } else if (folderId == tmpFolder.id) {
         browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
             let toolbar = tree[0].children;
             toolbar.forEach(e => {
@@ -83,8 +159,10 @@ function adjustFolderAndInsert(folderId) {
 
 function fillBookmark(folderId) {
     const el_folder = document.querySelector(`div[tb_id="${folderId}"]`);
-    el_folder.classList.add('b-active');
-    const el_divs = document.querySelectorAll(`div:not([tb_id="${folderId}"])`);
+    if (el_folder) {
+        el_folder.classList.add('b-active');
+    }
+    const el_divs = document.querySelectorAll(`div.b-it:not([tb_id="${folderId}"])`);
     el_divs.forEach((div) => {
         div.classList.remove('b-active');
     });
@@ -92,7 +170,7 @@ function fillBookmark(folderId) {
     view.innerHTML = '';
     view.setAttribute('tb_id', folderId);
     adjustFolderAndInsert(folderId);
-    browser.storage.sync.get('otab_pin', function (r) {
+    (browser.storage || chrome.storage).sync.get('otab_pin', function (r) {
         if (r['otab_pin'] == folderId) {
             document.querySelector('.sp-t').classList.add('active');
         } else {
@@ -150,10 +228,10 @@ function insertLinkElement(link) {
 
 // 记录链接的点击次数
 function goLink(link_id) {
-    browser.runtime.sendMessage({
+    (browser.runtime || chrome.runtime).sendMessage({
         type: 'linkClick',
         link_id: link_id,
-      });
+    });
 }
 
 /// --- ContextMenu Start ---
@@ -190,38 +268,55 @@ const ContextMenu = function (options) {
 const contextMenu = ContextMenu({
     menus: [
         {
-            name: browser.i18n.getMessage('openInNewTab'),
+            name: (browser.i18n || chrome.i18n).getMessage('openInNewTab'),
             onClick: function (e) {
                 window.open(window.cur_link.url, '_blank');
             },
         },
         {
-            name: browser.i18n.getMessage('openInNewWindow'),
+            name: (browser.i18n || chrome.i18n).getMessage('openInNewWindow'),
             onClick: function (e) {
-                browser.windows.create({ url: window.cur_link.url });
+                (browser.windows || chrome.windows).create({ url: window.cur_link.url });
             },
         },
         {
-            name: browser.i18n.getMessage('copyLink'),
+            name: (browser.i18n || chrome.i18n).getMessage('copyLink'),
             onClick: function (e) {
-                 // 使用剪贴板 API 复制内容
                 navigator.clipboard.writeText(window.cur_link.url).then(() => {
-                    showTooltip(e.clientX, e.clientY, browser.i18n.getMessage('ok'));
+                    showTooltip(e.clientX, e.clientY, (browser.i18n || chrome.i18n).getMessage('ok'));
                 }).catch(err => {
                     console.error('复制失败: ', err);
                 });
             }
         },
         {
-            name: browser.i18n.getMessage('delete'),
+            name: (browser.i18n || chrome.i18n).getMessage('delete'),
             onClick: function (e) {
                 let id = window.cur_link.id;
-                if (confirm(browser.i18n.getMessage('confirmDelete'))) {
+                let url = window.cur_link.url;
+                if (confirm((browser.i18n || chrome.i18n).getMessage('confirmDelete'))) {
                     try {
-                        document.querySelector(`a[tb_id="${id}"]`).remove();
-                        browser.bookmarks.remove(id);
+                        const targetEl = document.querySelector(`a[tb_id="${id}"]`);
+                        if (targetEl) targetEl.remove();
+
+                        if (id && id.startsWith('pin_')) {
+                            // 从图钉存储中删除
+                            (browser.storage || chrome.storage).sync.get('tmpinData', function(r) {
+                                let data = r.tmpinData;
+                                if (data && Array.isArray(data.groups)) {
+                                    data.groups.forEach(g => {
+                                        if (Array.isArray(g.pages)) {
+                                            g.pages = g.pages.filter(p => p.url !== url);
+                                        }
+                                    });
+                                    (browser.storage || chrome.storage).sync.set({ tmpinData: data });
+                                }
+                            });
+                        } else {
+                            browser.bookmarks.remove(id);
+                        }
                     } catch (error) {
-                        alert(browser.i18n.getMessage('deleteFailed'));
+                        alert((browser.i18n || chrome.i18n).getMessage('deleteFailed'));
                         console.error(error);
                     }
                 }
