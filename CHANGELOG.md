@@ -4,7 +4,13 @@ All notable changes to the Otab extension will be documented in this file.
 
 ---
 
-### [0.3.0] - 2026-10-26
+### [0.3.1] - 2026-10-26 22
+- **设置页面彩蛋**：规范并补齐设置页面版本与发布时间戳彩蛋（精确至小时，如 `Otab 0.3.1 - 2026.10.26 22 :)`）。
+- **多语言统一**：同步所有国际化 locale 文件中的版本彩蛋时间。
+
+---
+
+### [0.3.0] - 2026-10-26 22
 
 #### 新增与升级
 - **Manifest V3 升级**：规范全面迁移至 Firefox Manifest V3（`Gecko min: 109.0+`）。
