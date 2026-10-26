@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Otab Pin</title>
+  <link rel="stylesheet" href="../css/popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <button id="pinBtn" class="pin-btn" title="__MSG_pinButtonTooltip__">
+        <span class="pin-icon">📌</span>
+        <span class="pin-text" data-i18n="pinButton">Pin</span>
+      </button>
+      <div class="header-right">
+        <span id="limitBadge" class="limit-badge" title="__MSG_limitCountHint__">0/60</span>
+        <button id="addGroupBtn" class="add-group-btn" title="__MSG_addNewGroupTooltip__">
+          <span class="add-icon">+</span>
+          <span class="add-text" data-i18n="addNewGroup">Add Group</span>
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div id="emptyState" class="empty-state">
+        <div class="empty-icon">🔖</div>
+        <p data-i18n="emptyState">No pinned pages yet</p>
+        <p class="hint" data-i18n="emptyStateHint">Right-click on a page or click Pin to add it</p>
+      </div>
+      <div id="groupsContainer" class="groups-container"></div>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay" style="display: none;">
+    <div id="modal" class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle" class="modal-title"></h3>
+        <button id="modalClose" class="modal-close">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalMessage" class="modal-message"></p>
+        <input type="text" id="modalInput" class="modal-input" style="display: none;" placeholder="Enter value">
+      </div>
+      <div class="modal-footer">
+        <button id="modalCancel" class="modal-btn modal-btn-cancel" data-i18n="cancel">Cancel</button>
+        <button id="modalConfirm" class="modal-btn modal-btn-confirm" data-i18n="ok">OK</button>
+      </div>
+    </div>
+  </div>
+  <script src="../js/popup.js"></script>
+</body>
+</html>
