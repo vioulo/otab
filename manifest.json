@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Otab",
     "version": "0.3.0",
     "description": "__MSG_extensionDescription__",
@@ -7,16 +7,15 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "firefox-otab@void.gold",
-            "strict_min_version": "100.0"
+            "strict_min_version": "109.0"
         }
     },
     "background": {
         "scripts": [
             "js/background.js"
-        ],
-        "persistent": false
+        ]
     },
-    "browser_action": {
+    "action": {
         "default_popup": "pages/popup.html",
         "default_icon": {
             "32": "imgs/icons/icon32.png",
