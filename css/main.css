@@ -58,14 +58,6 @@ body {
         font-size: 60px;
     }
 }
-.b-it-pinned {
-    border-left: 3px solid #385af2;
-}
-@media (prefers-color-scheme: dark) {
-    .b-it-pinned {
-        border-left: 3px solid #45c67d;
-    }
-}
 .svg-pin {
     position: fixed;
     top: 0.5rem;

@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "Minimalistische neue Seite mit Lesezeichenverwaltung und Pinboard für Webseiten"
+    },
     "noBookmarks": {
         "message": "Keine Lesezeichen in der Symbolleiste"
     },
@@ -21,7 +27,7 @@
         "message": "Bestätigen"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "ok"
@@ -64,5 +70,98 @@
     },
     "btnTitlePin": {
         "message": "Ordner anheften"
+    },
+    "pinButton": {
+        "message": "Aktuelle Seite anheften"
+    },
+    "pinButtonTooltip": {
+        "message": "Aktuelle Seite anheften (max. 60)"
+    },
+    "emptyState": {
+        "message": "Noch keine angehefteten Seiten"
+    },
+    "emptyStateHint": {
+        "message": "Rechtsklick auf eine Seite oder oben klicken, um sie anzuheften"
+    },
+    "deleteButtonTooltip": {
+        "message": "Löschen"
+    },
+    "contextMenuPin": {
+        "message": "Seite an Otab anheften"
+    },
+    "contextMenuUnpin": {
+        "message": "Von Otab lösen"
+    },
+    "cannotPinSpecialPage": {
+        "message": "Spezielle Browser-Seiten können nicht angeheftet werden"
+    },
+    "alreadyPinned": {
+        "message": "Diese Seite ist bereits angeheftet"
+    },
+    "pinnedSuccess": {
+        "message": "Seite erfolgreich angeheftet"
+    },
+    "unpinnedSuccess": {
+        "message": "Anheftung der Seite erfolgreich aufgehoben"
+    },
+    "addNewGroup": {
+        "message": "Neue Gruppe"
+    },
+    "addNewGroupTooltip": {
+        "message": "Neue Gruppe (max. 6 Gruppen)"
+    },
+    "editGroup": {
+        "message": "Gruppe bearbeiten"
+    },
+    "deleteGroup": {
+        "message": "Gruppe löschen"
+    },
+    "groupName": {
+        "message": "Gruppenname"
+    },
+    "newGroup": {
+        "message": "Neue Gruppe"
+    },
+    "defaultGroup": {
+        "message": "Standard"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "Die Standardgruppe kann nicht gelöscht werden"
+    },
+    "confirmDeleteGroup": {
+        "message": "Möchten Sie diese Gruppe wirklich löschen? Alle Seiten in dieser Gruppe werden in die Standardgruppe verschoben."
+    },
+    "notice": {
+        "message": "Hinweis"
+    },
+    "input": {
+        "message": "Eingabe"
+    },
+    "warning": {
+        "message": "Warnung"
+    },
+    "syncFailed": {
+        "message": "Synchronisierung fehlgeschlagen"
+    },
+    "success": {
+        "message": "Erfolg"
+    },
+    "cancel": {
+        "message": "Abbrechen"
+    },
+    "noPagesInGroup": {
+        "message": "Keine Seiten in dieser Gruppe"
+    },
+    "openAllLinks": {
+        "message": "Alle Links im Hintergrund öffnen"
+    },
+    "maxPagesReached": {
+        "message": "Limit der angehefteten Links erreicht (maximal 60)"
+    },
+    "maxGroupsReached": {
+        "message": "Limit der Gruppen erreicht (maximal 6 Gruppen)"
+    },
+    "limitCountHint": {
+        "message": "Max. 60 Links, max. 6 Gruppen"
     }
 }

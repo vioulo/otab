@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "Nueva pestaña minimalista con gestor de marcadores y panel de páginas fijadas"
+    },
     "noBookmarks": {
         "message": "No hay marcadores en la barra de herramientas"
     },
@@ -21,7 +27,7 @@
         "message": "Confirmar"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "ok"
@@ -64,5 +70,98 @@
     },
     "btnTitlePin": {
         "message": "Fijar carpeta"
+    },
+    "pinButton": {
+        "message": "Fijar página actual"
+    },
+    "pinButtonTooltip": {
+        "message": "Fijar la página actual (máx. 60)"
+    },
+    "emptyState": {
+        "message": "Aún no hay páginas fijadas"
+    },
+    "emptyStateHint": {
+        "message": "Haz clic derecho en una página o haz clic arriba para fijarla"
+    },
+    "deleteButtonTooltip": {
+        "message": "Eliminar"
+    },
+    "contextMenuPin": {
+        "message": "Fijar página en Otab"
+    },
+    "contextMenuUnpin": {
+        "message": "Desfijar de Otab"
+    },
+    "cannotPinSpecialPage": {
+        "message": "No se pueden fijar páginas especiales del navegador"
+    },
+    "alreadyPinned": {
+        "message": "Esta página ya está fijada"
+    },
+    "pinnedSuccess": {
+        "message": "Página fijada correctamente"
+    },
+    "unpinnedSuccess": {
+        "message": "Página desfijada correctamente"
+    },
+    "addNewGroup": {
+        "message": "Nuevo grupo"
+    },
+    "addNewGroupTooltip": {
+        "message": "Nuevo grupo (máx. 6 grupos)"
+    },
+    "editGroup": {
+        "message": "Editar grupo"
+    },
+    "deleteGroup": {
+        "message": "Eliminar grupo"
+    },
+    "groupName": {
+        "message": "Nombre del grupo"
+    },
+    "newGroup": {
+        "message": "Nuevo grupo"
+    },
+    "defaultGroup": {
+        "message": "Predeterminado"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "No se puede eliminar el grupo predeterminado"
+    },
+    "confirmDeleteGroup": {
+        "message": "¿Seguro que quieres eliminar este grupo? Todas sus páginas se moverán al grupo predeterminado."
+    },
+    "notice": {
+        "message": "Aviso"
+    },
+    "input": {
+        "message": "Entrada"
+    },
+    "warning": {
+        "message": "Advertencia"
+    },
+    "syncFailed": {
+        "message": "Error de sincronización"
+    },
+    "success": {
+        "message": "Correcto"
+    },
+    "cancel": {
+        "message": "Cancelar"
+    },
+    "noPagesInGroup": {
+        "message": "No hay páginas en este grupo"
+    },
+    "openAllLinks": {
+        "message": "Abrir todos los enlaces en segundo plano"
+    },
+    "maxPagesReached": {
+        "message": "Límite de enlaces fijados alcanzado (máximo 60)"
+    },
+    "maxGroupsReached": {
+        "message": "Límite de grupos alcanzado (máximo 6 grupos)"
+    },
+    "limitCountHint": {
+        "message": "Máx. 60 enlaces, máx. 6 grupos"
     }
 }

@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "ブックマーク管理とページピン留めを備えたミニマルな新しいタブ"
+    },
     "noBookmarks": {
         "message": "ツールバーにブックマークがありません"
     },
@@ -21,7 +27,7 @@
         "message": "確認"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "ok"
@@ -64,5 +70,98 @@
     },
     "btnTitlePin": {
         "message": "フォルダをピン留め"
+    },
+    "pinButton": {
+        "message": "現在のページをピン留め"
+    },
+    "pinButtonTooltip": {
+        "message": "現在のページをピン留め（最大60件）"
+    },
+    "emptyState": {
+        "message": "まだピン留めされたページはありません"
+    },
+    "emptyStateHint": {
+        "message": "ページを右クリックするか、上のボタンをクリックしてピン留めします"
+    },
+    "deleteButtonTooltip": {
+        "message": "削除"
+    },
+    "contextMenuPin": {
+        "message": "このページを Otab にピン留め"
+    },
+    "contextMenuUnpin": {
+        "message": "Otab からピン留めを解除"
+    },
+    "cannotPinSpecialPage": {
+        "message": "ブラウザの特殊ページはピン留めできません"
+    },
+    "alreadyPinned": {
+        "message": "このページはすでにピン留めされています"
+    },
+    "pinnedSuccess": {
+        "message": "ページをピン留めしました"
+    },
+    "unpinnedSuccess": {
+        "message": "ページのピン留めを解除しました"
+    },
+    "addNewGroup": {
+        "message": "新しいグループ"
+    },
+    "addNewGroupTooltip": {
+        "message": "新しいグループ（最大6グループ）"
+    },
+    "editGroup": {
+        "message": "グループを編集"
+    },
+    "deleteGroup": {
+        "message": "グループを削除"
+    },
+    "groupName": {
+        "message": "グループ名"
+    },
+    "newGroup": {
+        "message": "新しいグループ"
+    },
+    "defaultGroup": {
+        "message": "デフォルト"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "デフォルトグループは削除できません"
+    },
+    "confirmDeleteGroup": {
+        "message": "このグループを削除してもよろしいですか？このグループのすべてのページはデフォルトグループに移動されます。"
+    },
+    "notice": {
+        "message": "お知らせ"
+    },
+    "input": {
+        "message": "入力"
+    },
+    "warning": {
+        "message": "警告"
+    },
+    "syncFailed": {
+        "message": "同期に失敗しました"
+    },
+    "success": {
+        "message": "成功"
+    },
+    "cancel": {
+        "message": "キャンセル"
+    },
+    "noPagesInGroup": {
+        "message": "このグループにページはありません"
+    },
+    "openAllLinks": {
+        "message": "すべてのリンクをバックグラウンドで開く"
+    },
+    "maxPagesReached": {
+        "message": "ピン留めリンク数の上限に達しました（最大60件）"
+    },
+    "maxGroupsReached": {
+        "message": "グループ数の上限に達しました（最大6グループ）"
+    },
+    "limitCountHint": {
+        "message": "リンク最大60件、グループ最大6件"
     }
 }

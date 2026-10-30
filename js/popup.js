@@ -1,5 +1,6 @@
 (function() {
-  const STORAGE_KEY = 'tmpinData';
+  const STORAGE_KEY = PinStore.KEY_INDEX;
+  const CHUNK_PREFIX = PinStore.KEY_CHUNK_PREFIX;
   const MAX_PAGES = 60;
   const MAX_GROUPS = 6;
   let modalCallback = null;
@@ -117,8 +118,12 @@
   }
 
   function getData(callback) {
-    (browser.storage || chrome.storage).sync.get([STORAGE_KEY], function(result) {
-      let data = result[STORAGE_KEY];
+    PinStore.read(function(err, data) {
+      if (err) {
+        showSyncError(err);
+        callback(err, null);
+        return;
+      }
       if (!data || !Array.isArray(data.groups) || data.groups.length === 0) {
         data = {
           groups: [
@@ -131,14 +136,25 @@
           ]
         };
       }
-      callback(data);
+      callback(null, data);
     });
   }
 
   function saveData(data, callback) {
-    (browser.storage || chrome.storage).sync.set({ [STORAGE_KEY]: data }, function() {
-      if (callback) callback();
+    PinStore.write(data, function(err) {
+      if (err) {
+        showSyncError(err);
+      }
+      if (callback) callback(err);
     });
+  }
+
+  // 同步写入失败时给出提示，不再静默吞掉
+  function showSyncError(err) {
+    showAlert(
+      (getMessage('syncFailed') || 'Sync failed') + (err && err.message ? '\n' + err.message : ''),
+      getMessage('warning') || 'Warning'
+    );
   }
 
   function getTotalPages(data) {
@@ -197,7 +213,8 @@
       return;
     }
 
-    groupsContainer.style.display = 'block';
+    // 保持 flex，容器上的 gap 才是分组之间的上下间距
+    groupsContainer.style.display = 'flex';
     emptyState.style.display = 'none';
     groupsContainer.innerHTML = '';
 
@@ -461,19 +478,21 @@
   }
 
   function toggleGroup(groupId) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const group = data.groups.find(g => g.id === groupId);
       if (group) {
         group.expanded = (group.expanded === false) ? true : false;
-        saveData(data, function() {
-          renderGroups(data);
+        saveData(data, function(saveErr) {
+          if (!saveErr) renderGroups(data);
         });
       }
     });
   }
 
   async function addGroup() {
-    getData(async function(data) {
+    getData(async function(err, data) {
+      if (err) return;
       if (data.groups.length >= MAX_GROUPS) {
         await showAlert(
           getMessage('maxGroupsReached') || 'Maximum 6 groups allowed',
@@ -497,14 +516,15 @@
         expanded: true
       });
 
-      saveData(data, function() {
-        renderGroups(data);
+      saveData(data, function(saveErr) {
+        if (!saveErr) renderGroups(data);
       });
     });
   }
 
   async function editGroup(groupId) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const group = data.groups.find(g => g.id === groupId);
       if (group) {
         showPrompt(
@@ -515,8 +535,8 @@
         ).then(function(name) {
           if (name && name.trim()) {
             group.name = name.trim();
-            saveData(data, function() {
-              renderGroups(data);
+            saveData(data, function(saveErr) {
+              if (!saveErr) renderGroups(data);
             });
           }
         });
@@ -539,7 +559,8 @@
     );
     if (!confirmed) return;
 
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const groupIndex = data.groups.findIndex(g => g.id === groupId);
       if (groupIndex !== -1) {
         const deletedGroup = data.groups[groupIndex];
@@ -550,27 +571,29 @@
         }
 
         data.groups.splice(groupIndex, 1);
-        saveData(data, function() {
-          renderGroups(data);
+        saveData(data, function(saveErr) {
+          if (!saveErr) renderGroups(data);
         });
       }
     });
   }
 
   function deletePage(groupId, pageIndex) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const group = data.groups.find(g => g.id === groupId);
       if (group && Array.isArray(group.pages)) {
         group.pages.splice(pageIndex, 1);
-        saveData(data, function() {
-          renderGroups(data);
+        saveData(data, function(saveErr) {
+          if (!saveErr) renderGroups(data);
         });
       }
     });
   }
 
   function movePage(sourceGroupId, sourceIndex, targetGroupId, targetIndex) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const sourceGroup = data.groups.find(g => g.id === sourceGroupId);
       const targetGroup = data.groups.find(g => g.id === targetGroupId);
 
@@ -578,8 +601,8 @@
         const page = sourceGroup.pages.splice(sourceIndex, 1)[0];
         if (page) {
           targetGroup.pages.splice(targetIndex, 0, page);
-          saveData(data, function() {
-            renderGroups(data);
+          saveData(data, function(saveErr) {
+            if (!saveErr) renderGroups(data);
           });
         }
       }
@@ -587,7 +610,8 @@
   }
 
   function openAllLinks(groupId) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const group = data.groups.find(g => g.id === groupId);
       if (group && group.pages && group.pages.length > 0) {
         const tabsApi = (browser.tabs || chrome.tabs);
@@ -615,7 +639,8 @@
         return;
       }
 
-      getData(async function(data) {
+      getData(async function(err, data) {
+        if (err) return;
         const total = getTotalPages(data);
         if (total >= MAX_PAGES) {
           await showAlert(
@@ -649,15 +674,16 @@
           });
         }
 
-        saveData(data, function() {
-          renderGroups(data);
+        saveData(data, function(saveErr) {
+          if (!saveErr) renderGroups(data);
         });
       });
     });
   }
 
   function loadData() {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       renderGroups(data);
     });
   }
@@ -667,7 +693,11 @@
     loadData();
 
     const pinBtn = document.getElementById('pinBtn');
-    if (pinBtn) pinBtn.onclick = pinCurrentPage;
+    if (pinBtn) {
+      pinBtn.onclick = pinCurrentPage;
+      // 按钮只有图标，无障碍名称用完整文案
+      pinBtn.setAttribute('aria-label', getMessage('pinButton') || 'Pin');
+    }
 
     const addGroupBtn = document.getElementById('addGroupBtn');
     if (addGroupBtn) addGroupBtn.onclick = addGroup;
@@ -675,7 +705,12 @@
     const storageApi = (browser.storage || chrome.storage);
     if (storageApi && storageApi.onChanged) {
       storageApi.onChanged.addListener(function(changes, namespace) {
-        if (namespace === 'sync' && changes[STORAGE_KEY]) {
+        if (namespace !== 'sync') return;
+        // 索引与分块都可能变，任一变动都要重新加载
+        const touched = Object.keys(changes).some(function(key) {
+          return key === STORAGE_KEY || key.indexOf(CHUNK_PREFIX) === 0;
+        });
+        if (touched) {
           loadData();
         }
       });

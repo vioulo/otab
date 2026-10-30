@@ -27,7 +27,7 @@
         "message": "确认"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "确定"
@@ -70,12 +70,6 @@
     },
     "btnTitlePin": {
         "message": "固定文件夹"
-    },
-    "pinnedBoard": {
-        "message": "📌 图钉板"
-    },
-    "pinnedBoardDesc": {
-        "message": "常用网页图钉"
     },
     "pinButton": {
         "message": "钉住当前页面"
@@ -145,6 +139,9 @@
     },
     "warning": {
         "message": "警告"
+    },
+    "syncFailed": {
+        "message": "同步失败"
     },
     "success": {
         "message": "成功"

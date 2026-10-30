@@ -27,7 +27,7 @@
         "message": "Confirm"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "OK"
@@ -70,12 +70,6 @@
     },
     "btnTitlePin": {
         "message": "Pin folder"
-    },
-    "pinnedBoard": {
-        "message": "📌 Pinned Board"
-    },
-    "pinnedBoardDesc": {
-        "message": "Pinned pages"
     },
     "pinButton": {
         "message": "Pin Current Page"
@@ -145,6 +139,9 @@
     },
     "warning": {
         "message": "Warning"
+    },
+    "syncFailed": {
+        "message": "Sync failed"
     },
     "success": {
         "message": "Success"

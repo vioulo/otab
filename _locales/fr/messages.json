@@ -1,4 +1,10 @@
 {
+    "extensionName": {
+        "message": "Otab"
+    },
+    "extensionDescription": {
+        "message": "Nouvelle page minimaliste avec gestionnaire de marque-pages et tableau de pages épinglées"
+    },
     "noBookmarks": {
         "message": "Aucun signet dans la barre d'outils"
     },
@@ -21,7 +27,7 @@
         "message": "Confirmer"
     },
     "version": {
-        "message": "Otab 0.3.1 - 2026.10.26 22 :)"
+        "message": "Otab 0.3.2 - 2026.10.30 14 :)"
     },
     "ok": {
         "message": "ok"
@@ -64,5 +70,98 @@
     },
     "btnTitlePin": {
         "message": "Épingler le dossier"
+    },
+    "pinButton": {
+        "message": "Épingler la page actuelle"
+    },
+    "pinButtonTooltip": {
+        "message": "Épingler la page actuelle (60 max)"
+    },
+    "emptyState": {
+        "message": "Aucune page épinglée pour le moment"
+    },
+    "emptyStateHint": {
+        "message": "Faites un clic droit sur une page ou cliquez ci-dessus pour l'épingler"
+    },
+    "deleteButtonTooltip": {
+        "message": "Supprimer"
+    },
+    "contextMenuPin": {
+        "message": "Épingler la page dans Otab"
+    },
+    "contextMenuUnpin": {
+        "message": "Détacher de Otab"
+    },
+    "cannotPinSpecialPage": {
+        "message": "Impossible d’épingler les pages spéciales du navigateur"
+    },
+    "alreadyPinned": {
+        "message": "Cette page est déjà épinglée"
+    },
+    "pinnedSuccess": {
+        "message": "Page épinglée avec succès"
+    },
+    "unpinnedSuccess": {
+        "message": "Page détachée avec succès"
+    },
+    "addNewGroup": {
+        "message": "Nouveau groupe"
+    },
+    "addNewGroupTooltip": {
+        "message": "Nouveau groupe (6 groupes max)"
+    },
+    "editGroup": {
+        "message": "Modifier le groupe"
+    },
+    "deleteGroup": {
+        "message": "Supprimer le groupe"
+    },
+    "groupName": {
+        "message": "Nom du groupe"
+    },
+    "newGroup": {
+        "message": "Nouveau groupe"
+    },
+    "defaultGroup": {
+        "message": "Par défaut"
+    },
+    "cannotDeleteDefaultGroup": {
+        "message": "Impossible de supprimer le groupe par défaut"
+    },
+    "confirmDeleteGroup": {
+        "message": "Voulez-vous vraiment supprimer ce groupe ? Toutes les pages de ce groupe seront déplacées vers le groupe par défaut."
+    },
+    "notice": {
+        "message": "Avis"
+    },
+    "input": {
+        "message": "Saisie"
+    },
+    "warning": {
+        "message": "Avertissement"
+    },
+    "syncFailed": {
+        "message": "Échec de la synchronisation"
+    },
+    "success": {
+        "message": "Succès"
+    },
+    "cancel": {
+        "message": "Annuler"
+    },
+    "noPagesInGroup": {
+        "message": "Aucune page dans ce groupe"
+    },
+    "openAllLinks": {
+        "message": "Ouvrir tous les liens en arrière-plan"
+    },
+    "maxPagesReached": {
+        "message": "Limite de liens épinglés atteinte (60 maximum)"
+    },
+    "maxGroupsReached": {
+        "message": "Limite de groupes atteinte (6 groupes maximum)"
+    },
+    "limitCountHint": {
+        "message": "60 liens max, 6 groupes max"
     }
 }

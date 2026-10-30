@@ -11,10 +11,9 @@
     <div class="header">
       <button id="pinBtn" class="pin-btn" title="__MSG_pinButtonTooltip__">
         <span class="pin-icon">📌</span>
-        <span class="pin-text" data-i18n="pinButton">Pin</span>
       </button>
+      <span id="limitBadge" class="limit-badge" title="__MSG_limitCountHint__">0/60</span>
       <div class="header-right">
-        <span id="limitBadge" class="limit-badge" title="__MSG_limitCountHint__">0/60</span>
         <button id="addGroupBtn" class="add-group-btn" title="__MSG_addNewGroupTooltip__">
           <span class="add-icon">+</span>
           <span class="add-text" data-i18n="addNewGroup">Add Group</span>
@@ -47,6 +46,7 @@
       </div>
     </div>
   </div>
+  <script src="../js/pinstore.js"></script>
   <script src="../js/popup.js"></script>
 </body>
 </html>

@@ -163,12 +163,13 @@ document.querySelector('.svg-pin').addEventListener('click', function () {
 // show pin link
 browser.storage.sync.get('otab_pin', function (r) {
     const el_link = document.querySelector('.view');
-    const folderId = r['otab_pin'] || 0;
+    // 旧版本的图钉板已移除，残留的 id 视为未固定
+    const folderId = (r['otab_pin'] && r['otab_pin'] !== 'otab-pinned') ? r['otab_pin'] : 0;
     if (!folderId) {
         el_link.innerHTML = '<div class="empty-link">' + browser.i18n.getMessage('noPinnedFolder') + '</div>';
     } else {
         document.querySelector('.sp-t').classList.add('active');
-        el_link.setAttribute('tb_id', r['otab_pin']);
+        el_link.setAttribute('tb_id', folderId);
         adjustFolderAndInsert(folderId);
     }
 });

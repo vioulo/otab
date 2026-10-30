@@ -1,5 +1,4 @@
 (function() {
-  const STORAGE_KEY = 'tmpinData';
   const MENU_PIN = 'otab-pin';
   const MENU_UNPIN = 'otab-unpin';
   const MAX_PAGES = 60;
@@ -13,8 +12,11 @@
   }
 
   function getData(callback) {
-    (browser.storage || chrome.storage).sync.get([STORAGE_KEY], function(result) {
-      let data = result[STORAGE_KEY];
+    PinStore.read(function(err, data) {
+      if (err) {
+        callback(err, null);
+        return;
+      }
       if (!data || !Array.isArray(data.groups) || data.groups.length === 0) {
         data = {
           groups: [
@@ -27,13 +29,13 @@
           ]
         };
       }
-      callback(data);
+      callback(null, data);
     });
   }
 
   function saveData(data, callback) {
-    (browser.storage || chrome.storage).sync.set({ [STORAGE_KEY]: data }, function() {
-      if (callback) callback();
+    PinStore.write(data, function(err) {
+      if (callback) callback(err);
     });
   }
 
@@ -79,7 +81,8 @@
       return;
     }
 
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) return;
       const pinned = isPinned(tab.url, data);
       try {
         api.update(MENU_PIN, { visible: !pinned });
@@ -94,7 +97,12 @@
       return;
     }
 
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) {
+        if (callback) callback(false, 'storageError');
+        return;
+      }
+
       if (isPinned(url, data)) {
         if (callback) callback(false, 'alreadyPinned');
         return;
@@ -122,14 +130,19 @@
         });
       }
 
-      saveData(data, function() {
-        if (callback) callback(true, 'success');
+      saveData(data, function(saveErr) {
+        if (callback) callback(!saveErr, saveErr ? 'saveFailed' : 'success');
       });
     });
   }
 
   function unpinPage(url, callback) {
-    getData(function(data) {
+    getData(function(err, data) {
+      if (err) {
+        if (callback) callback(false, err);
+        return;
+      }
+
       let found = false;
 
       data.groups.forEach(group => {
@@ -147,8 +160,8 @@
         return;
       }
 
-      saveData(data, function() {
-        if (callback) callback(true);
+      saveData(data, function(saveErr) {
+        if (callback) callback(!saveErr, saveErr || null);
       });
     });
   }
@@ -193,16 +206,26 @@
             getMessage('warning') || 'Warning',
             getMessage('cannotPinSpecialPage') || 'Cannot pin special browser pages'
           );
+        } else if (reason === 'saveFailed' || reason === 'storageError') {
+          showNotification(
+            getMessage('warning') || 'Warning',
+            getMessage('syncFailed') || 'Sync failed'
+          );
         }
       });
     } else if (info.menuItemId === MENU_UNPIN) {
       const url = info.linkUrl || (tab && tab.url);
 
-      unpinPage(url, function(success) {
+      unpinPage(url, function(success, err) {
         if (success) {
           showNotification(
             getMessage('extensionName') || 'Otab',
             getMessage('unpinnedSuccess') || 'Page unpinned successfully'
+          );
+        } else if (err) {
+          showNotification(
+            getMessage('warning') || 'Warning',
+            getMessage('syncFailed') || 'Sync failed'
           );
         }
       });

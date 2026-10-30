@@ -1,34 +1,7 @@
-const PINNED_BOARD_ID = 'otab-pinned';
 const tmpFolder = {
     id: 'no-fo',
     title: '缓存区',
 };
-
-// 渲染侧边栏置顶的图钉板
-function renderPinnedBoardSidebar(el_box) {
-    (browser.storage || chrome.storage).sync.get(['tmpinData', 'otab_pin'], function(r) {
-        const data = r.tmpinData;
-        const total = (data && Array.isArray(data.groups))
-            ? data.groups.reduce((acc, g) => acc + (Array.isArray(g.pages) ? g.pages.length : 0), 0)
-            : 0;
-
-        let el_pinned = document.createElement('div');
-        el_pinned.className = 'b-it b-it-pinned';
-        el_pinned.setAttribute('tb_id', PINNED_BOARD_ID);
-        el_pinned.onclick = () => {
-            fillBookmark(PINNED_BOARD_ID);
-        };
-
-        if (r['otab_pin'] === PINNED_BOARD_ID) {
-            el_pinned.classList.add('b-active');
-        }
-
-        let el_uc = `<div class="url-count">${total}</div>`;
-        let title = `<div class="b-title">${(browser.i18n || chrome.i18n).getMessage('pinnedBoard') || '📌 图钉板'}</div>${el_uc}`;
-        el_pinned.innerHTML = title;
-        el_box.prepend(el_pinned);
-    });
-}
 
 // 读取书签内容
 browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
@@ -78,64 +51,14 @@ browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
             el_folder.innerHTML = title;
             el_box.appendChild(el_folder);
         });
-
-        // 在侧边栏顶部加入图钉板
-        renderPinnedBoardSidebar(el_box);
     });
 }).catch((error) => {
     console.error(error);
 });
 
-// 监听图钉数据变化，实时联动侧边栏与主视图
-(browser.storage || chrome.storage).onChanged.addListener(function(changes, namespace) {
-    if (namespace === 'sync' && changes['tmpinData']) {
-        const pinCountEl = document.querySelector(`div[tb_id="${PINNED_BOARD_ID}"] .url-count`);
-        const data = changes['tmpinData'].newValue;
-        const total = (data && Array.isArray(data.groups))
-            ? data.groups.reduce((acc, g) => acc + (Array.isArray(g.pages) ? g.pages.length : 0), 0)
-            : 0;
-        if (pinCountEl) pinCountEl.textContent = total;
-
-        const currentView = document.querySelector('.view');
-        if (currentView && currentView.getAttribute('tb_id') === PINNED_BOARD_ID) {
-            adjustFolderAndInsert(PINNED_BOARD_ID);
-        }
-    }
-});
-
 // 判断文件夹 id 并填充数据
 function adjustFolderAndInsert(folderId) {
-    if (folderId === PINNED_BOARD_ID) {
-        (browser.storage || chrome.storage).sync.get('tmpinData', function (r) {
-            let data = r.tmpinData;
-            let el_view = document.querySelector('.view');
-            el_view.innerHTML = '';
-            if (!data || !Array.isArray(data.groups) || data.groups.length === 0) {
-                el_view.innerHTML = `<div class="empty-link">${(browser.i18n || chrome.i18n).getMessage('emptyState') || '还没有钉住的页面'}</div>`;
-                adjustView();
-                return;
-            }
-
-            let hasAny = false;
-            data.groups.forEach(group => {
-                if (Array.isArray(group.pages) && group.pages.length > 0) {
-                    hasAny = true;
-                    group.pages.forEach(p => {
-                        insertLinkElement({
-                            id: 'pin_' + p.url,
-                            url: p.url,
-                            title: p.title || p.url
-                        });
-                    });
-                }
-            });
-
-            if (!hasAny) {
-                el_view.innerHTML = `<div class="empty-link">${(browser.i18n || chrome.i18n).getMessage('emptyState') || '还没有钉住的页面'}</div>`;
-            }
-            adjustView();
-        });
-    } else if (folderId == tmpFolder.id) {
+    if (folderId == tmpFolder.id) {
         browser.bookmarks.getSubTree("toolbar_____").then(async (tree) => {
             let toolbar = tree[0].children;
             toolbar.forEach(e => {
@@ -293,28 +216,11 @@ const contextMenu = ContextMenu({
             name: (browser.i18n || chrome.i18n).getMessage('delete'),
             onClick: function (e) {
                 let id = window.cur_link.id;
-                let url = window.cur_link.url;
                 if (confirm((browser.i18n || chrome.i18n).getMessage('confirmDelete'))) {
                     try {
                         const targetEl = document.querySelector(`a[tb_id="${id}"]`);
                         if (targetEl) targetEl.remove();
-
-                        if (id && id.startsWith('pin_')) {
-                            // 从图钉存储中删除
-                            (browser.storage || chrome.storage).sync.get('tmpinData', function(r) {
-                                let data = r.tmpinData;
-                                if (data && Array.isArray(data.groups)) {
-                                    data.groups.forEach(g => {
-                                        if (Array.isArray(g.pages)) {
-                                            g.pages = g.pages.filter(p => p.url !== url);
-                                        }
-                                    });
-                                    (browser.storage || chrome.storage).sync.set({ tmpinData: data });
-                                }
-                            });
-                        } else {
-                            browser.bookmarks.remove(id);
-                        }
+                        browser.bookmarks.remove(id);
                     } catch (error) {
                         alert((browser.i18n || chrome.i18n).getMessage('deleteFailed'));
                         console.error(error);
